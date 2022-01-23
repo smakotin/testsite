@@ -1,27 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}
-{{ category.title }} :: {{ block.super }}
-{% endblock %}
+{% block title %} {{ news_item.title }} :: {{ block.super }} {% endblock %}
 
 
 {% block sidebar %}
 {% include 'inc/_sidebar.html' %}
 {% endblock %}
 
-
 {% block content %}
-{% for item in news %}
 <div class="card mb-3">
     <div class="card-header">
-        Категория: {{ item.category }}
+        Категория: <a href="{{ news_item.category.get_absolute_url }}">{{ news_item.category }}</a>
     </div>
     <div class="card-body">
         <table width="100%" cellspacing="0" cellpadding="15">
             <tr>
+
                 {% if item.photo %}
                 <td class="leftcol">
-                    <img src="{{ item.photo.url }}" alt="" width="330">
+                    <img src="{{ news_item.photo.url }}" alt="" width="330">
                 </td>
                 {% else%}
                 <td class="leftcol">
@@ -29,22 +26,15 @@
                 </td>
                 {% endif %}
                 <td valign="top" ml-3>
-                    <h5 class="card-title mt-3">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.content|linebreaks|truncatewords:"135" }}</p>
-                    <a href="{{ item.get_absolute_url}}" class="btn btn-primary">Read more...</a>
+                    <h5 class="card-title mt-3">{{ news_item.title }}</h5>
+                    <p class="card-text">{{ news_item.content|linebreaks }}</p>
                 </td>
             </tr>
         </table>
 
     </div>
     <div class="card-footer text-muted">
-        {{ item.created_at|date:"d-M-Y H:i" }}
+        {{ news_item.created_at|date:"d-M-Y H:i" }}
     </div>
 </div>
-{% endfor %}
 {% endblock %}
-
-
-
-
-

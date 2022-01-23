@@ -29,7 +29,7 @@
                 <td valign="top" ml-3>
                     <h5 class="card-title mt-3">{{ item.title }}</h5>
                     <p class="card-text">{{ item.content|linebreaks|truncatewords:"135" }}</p>
-                    <a href="#" class="btn btn-primary">Read more...</a>
+                    <a href="{{ item.get_absolute_url}}" class="btn btn-primary">Read more...</a>
                 </td>
             </tr>
         </table>
